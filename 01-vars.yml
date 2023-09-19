@@ -1,0 +1,37 @@
+- name: demo on printing
+  hosts: localhost
+  task:
+    - name:  print hello Ishan
+      ansible.builtin.debug:
+        msg: hello Ishan
+
+    - name: demo on VARIABLES
+      hosts: localhost
+      vars:
+        url: example.com
+      task:
+        - name: print variable
+          ansible.builtin.debug:
+            msg: ""{{ url }}""
+
+## given variable in double quotes.
+
+    - name: demo on task level variable
+      hosts: localhost
+      vars:
+        url: play.example.com
+      task:
+        - name: print play variable
+          ansible.builtin.debug:
+            msg: ""{{ url }}""
+          vars:
+            url: play.example.com
+
+        - name: print play variable
+          ansible.builtin.debug:
+            msg: ""{ { url } }""
+
+    - name: demo on roles variable
+      hosts: localhost
+      roles:
+        - demo
